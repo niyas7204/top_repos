@@ -6,10 +6,12 @@ class StyledTexts {
         style: const TextStyle(
             fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
       );
-  static header1(String text) => Text(
+  static erroText(String text) => Text(
         text,
         style: const TextStyle(
-            fontSize: 30, fontWeight: FontWeight.w600, color: Colors.black),
+            fontSize: 25,
+            fontWeight: FontWeight.w600,
+            color: Color.fromARGB(152, 225, 11, 11)),
       );
   static header25(String text) => Text(
         text,

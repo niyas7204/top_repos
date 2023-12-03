@@ -6,6 +6,7 @@ import 'package:top_git/core/helpers/response_handler.dart';
 import 'package:top_git/core/urls.dart';
 import 'package:top_git/infrastructure/repository/get_repo_interface.dart';
 import 'package:top_git/model/topratedmodel.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 class GetRepoImplimentation implements GetRepoService {
   @override
@@ -15,20 +16,19 @@ class GetRepoImplimentation implements GetRepoService {
     String url = GetRepoUrl(
             date: date, itemCount: itemCount.toString(), page: page.toString())
         .getRepoUrl;
-    log('get');
+
     try {
       final response = await dio.get(url);
 
       if (response.statusCode == 200) {
-        log('success');
         final data = TopRatedRepoModel.fromJson(response.data);
         return StateResponse.success(data);
       }
     } on SocketException {
+      log("not network");
       return StateResponse.error("Network not found");
     } catch (e) {
-      log("error $e");
-      return StateResponse.error("Network not found");
+      return StateResponse.error("api call failed");
     }
     throw UnimplementedError();
   }

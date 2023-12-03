@@ -3,13 +3,12 @@ import 'dart:developer';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:top_git/model/repo_database_model.dart';
-import 'package:top_git/model/topratedmodel.dart';
 
 class DataBaseHandler {
   DataBaseHandler.init();
   static final DataBaseHandler instance = DataBaseHandler.init();
   Database? database;
-
+// intitalize database
   Future<Database> get initdatabase async {
     if (database != null) {
       log('null');
@@ -58,6 +57,7 @@ CREATE TABLE top_repo_table(
     }
   }
 
+// to insert data
   Future<void> insertData({required DatabaseModel data}) async {
     List<Map<String, dynamic>> existing = await database!
         .query('top_repo_table', where: 'id=?', whereArgs: [data.id]);
@@ -69,13 +69,16 @@ CREATE TABLE top_repo_table(
     }
   }
 
+// to delete data
   Future<void> delete() async {
     await database!.delete('top_repo_table');
   }
 
+// to get all data
   Future<DatabaseModelList> getAllData() async {
     final List<Map<String, dynamic>> maps = await database!.query(
       'top_repo_table',
+      orderBy: 'star_count DESC',
     );
 
     return DatabaseModelList.fromList(maps);

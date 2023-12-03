@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:top_git/core/constants/spaces.dart';
 import 'package:top_git/model/repo_database_model.dart';
-import 'package:top_git/model/topratedmodel.dart';
 import 'package:top_git/view/utils/styled_texts.dart';
 
 class RepoTile extends StatelessWidget {
   final DatabaseModel item;
-  const RepoTile({super.key, required this.item});
+  final String? errorMessage;
+  const RepoTile({super.key, required this.item, required this.errorMessage});
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +36,16 @@ class RepoTile extends StatelessWidget {
             CircleAvatar(
               radius: 50,
               backgroundImage: NetworkImage(item.avatarurl),
+              child: errorMessage != null
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        errorMessage!,
+                        style:
+                            TextStyle(color: Color.fromARGB(172, 244, 67, 54)),
+                      ),
+                    )
+                  : const SizedBox(),
             ),
             SpaceSized.space10w,
           ],

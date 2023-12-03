@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:top_git/database/database_handler.dart';
@@ -8,7 +6,7 @@ import 'package:top_git/view/pages/home.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DataBaseHandler.instance.initdatabase;
-  log('hello');
+
   runApp(const ProviderScope(child: MyApp()));
 }
 
